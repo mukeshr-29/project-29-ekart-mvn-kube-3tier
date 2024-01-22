@@ -70,7 +70,7 @@ pipeline{
             steps{
                 script{
                     withDockerRegistry(credentialsId: 'dockerhub', toolName: 'docker'){
-                        sh 'docker build -t mukeshr29/projectekart -f docker/.'
+                        sh 'docker build -t mukeshr29/projectekart -f docker/Dockerfile .'
                     }
                 }
             }
