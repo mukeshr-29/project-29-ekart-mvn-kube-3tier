@@ -66,5 +66,28 @@ pipeline{
                 }
             }
         }
+        stage('docker build and tag'){
+            steps{
+                script{
+                    withDockerRegistry(credentialsId: 'dockerhub', toolName: 'docker'){
+                        sh 'docker build -t mukeshr29/projectekart -f docker/.'
+                    }
+                }
+            }
+        }
+        stage('trivy img scan'){
+            steps{
+                sh 'trivy image mukeshr29/projectekart > trivyimg.txt'
+            }
+        }
+        stage('docker push img to dockerhub'){
+            steps{
+                script{
+                    withDockerRegistry(credentialsId: 'dockerhub', toolName: 'docker'){
+                        sh 'docker push mukeshr29/projectekart'
+                    }
+                }
+            }
+        }
     }
 }
