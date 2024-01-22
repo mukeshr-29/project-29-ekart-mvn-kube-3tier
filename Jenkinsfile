@@ -91,7 +91,7 @@ pipeline{
         }
         stage('kubernetes deployment'){
             steps{
-                withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', restrictKubeConfigAccess: false, serverUrl: ''){
+                withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s1', namespace: '', restrictKubeConfigAccess: false, serverUrl: ''){
                     sh 'kubectl apply -f deploymentservice.yml'
                     sh 'kubectl get svc'
 
