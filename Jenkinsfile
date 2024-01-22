@@ -54,5 +54,17 @@ pipeline{
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }
+        stage('build application'){
+            steps{
+                sh 'mvn package -DskipTests=true'
+            }
+        }
+        stage('deploy artifact to nexus repo'){
+            steps{
+                withMaven(globalMavenSettingsConfig: 'global-maven', jdk: 'jdk17', maven: 'maven3', mavenSettingsConfig: '', traceability: true){
+                    sh 'mvn deploy -DskipTests=true'
+                }
+            }
+        }
     }
 }
