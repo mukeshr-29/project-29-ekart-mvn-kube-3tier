@@ -92,7 +92,9 @@ pipeline{
         stage('kubernetes deployment'){
             steps{
                 withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: 'webapps', restrictKubeConfigAccess: false, serverUrl: 'https://10.0.18.194:6443'){
-                    sh 'kubectl apply -f deploymentservice.yml'
+                    sh 'kubectl apply -f deploymentservice.yml -n webapps'
+                    sh 'kubectl get svc -n webapps'
+
                 }
             }
         }
