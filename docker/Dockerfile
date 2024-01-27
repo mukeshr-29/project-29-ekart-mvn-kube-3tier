@@ -1,4 +1,4 @@
-FROM openjdk:8u151-jdk-alpine3.7
+FROM openjdk:8-jre-alpine
 
 ENV APP_HOME /usr/src/app
 
